@@ -71,7 +71,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/memo') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {{ config('app.name', 'Laravel') }} !!git
                     </a>
                 </div>
 

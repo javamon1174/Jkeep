@@ -25,3 +25,8 @@ Route::post('/memo/error', function()
 {
     return view('memo/error');
 });
+
+Route::get('/test', function()
+{
+    return view('test');
+});
