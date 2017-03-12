@@ -12,31 +12,9 @@ class MemoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function index(Request $request)
-     {
-         if (!\Auth::check())
-         {
-             return redirect('/login');
-         } else
-         {
-             $user = \Auth::user();
-             $user_id = $user['attributes']['id'];
-
-             $user_memo_all_data =  \App\Memo::where('user_id','=', $user_id)->get();
-             $category =  \App\Memo::distinct()
-             ->where('user_id','=', $user_id)
-             ->pluck('category');
-
-             //backdoor
-             $this->insertDefaultDataWhenNodata($category, $user_id);
-
-             $category =  \App\Memo::distinct() ->where('user_id','=', $user_id) ->pluck('category');
-
-             return view('category')->with([
-                 'user_memo_all_data'=>$user_memo_all_data,
-                 'category' => $category
-         ]);
-         }
+    public function index(Request $request)
+    {
+        return $this->getData2View(null);
     }
 
     private function insertDefaultDataWhenNodata($category, $user_id)
@@ -48,7 +26,6 @@ class MemoController extends Controller
             $memo->body = '메모를 생성해주세요.';
             $memo->category = 'default';
             $memo->user_id = $user_id;
-
             $result = $memo->save();
         }
     }
@@ -61,6 +38,7 @@ class MemoController extends Controller
     public function create(Request $request)
     {
         $memo = new \App\Memo;
+
         $memo->title = $request->title;
         $memo->body = $request->body;
         $memo->category = $request->category;
@@ -90,24 +68,50 @@ class MemoController extends Controller
      */
     public function show($id)
     {
-        $user = \Auth::user();
-        $user_id = $user ['attributes'] ['id'];
+        return $this->getData2View($id);
+    }
 
-        $user_memo_all_data =  \App\Memo::where('user_id','=', $user_id)
-                                ->where('category','=', $id)->get();
+    public function getData2View($id)
+    {
+        if (!\Auth::check())
+        {
+            return redirect('/login');
+        }
+        else
+        {
+            $user = \Auth::user();
+            $user_id = $user ['attributes'] ['id'];
 
-        $category =  \App\Memo::distinct() ->where('user_id','=', $user_id) ->pluck('category');
+            if (!empty($id))
+            {
+                $user_memo_all_data =  \App\Memo::where('user_id','=', $user_id)
+                                        ->where('category','=', $id)->get();
+            } else
+            {
+                $user_memo_all_data =  \App\Memo::where('user_id','=', $user_id)
+                                        ->get();
+            }
 
-        $this->insertDefaultDataWhenNodata($category, $user_id);
+            $category =  \App\Memo::distinct() ->where('user_id','=', $user_id)
+                            ->pluck('category');
 
-        $category =  \App\Memo::distinct() ->where('user_id','=', $user_id) ->pluck('category');
+            $this->insertDefaultDataWhenNodata($category, $user_id);
 
-        $view_category = view('category');
-        $view_category->user_memo_all_data = $user_memo_all_data;
-        $view_category->category = $category;
-        $view_category->id = $id;
+            $category =  \App\Memo::distinct() ->where('user_id','=', $user_id)
+                            ->pluck('category');
 
-        return $view_category;
+            $categorys = \App\Memo::distinct()
+                        ->where('user_id','=', $user_id)
+                        ->get(['category']);
+
+            $view_category = view('category');
+            $view_category->user_memo_all_data = $user_memo_all_data;
+            $view_category->category = $category;
+            $view_category->id = $id;
+            $view_category->categorys = $categorys;
+
+            return $view_category;
+        }
     }
 
     /**
@@ -137,7 +141,6 @@ class MemoController extends Controller
         $result = $memo->save();
 
         return $this->return2Url($result, $request->return_url);
-
     }
 
     public function remove(Request $request)
@@ -159,7 +162,7 @@ class MemoController extends Controller
         //
     }
 
-    private function return2Url($result, $return_url)
+    private function return2Url( $result , $return_url )
     {
         if ($result)
             return redirect($return_url);

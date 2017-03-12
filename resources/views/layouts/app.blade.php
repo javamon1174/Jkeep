@@ -130,7 +130,6 @@
                       <div class="row">
                           <div class="col-xs-4">
                               <select class="form-control" id="sel1" name="category">
-                                  <option>no filter</option>
                                   @foreach ($category as $item)
                                   <option>{{$item}}</option>
                                   @endforeach
@@ -149,6 +148,8 @@
                               onfocus="this.value='';">내용입력..</textarea>
                               <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                               <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                              <input type="hidden" name="return_url" value="{{ Request::url() }}">
+
                           </div>
                       </div>
                   </form>
@@ -167,9 +168,7 @@
         <div class="container">
             <div class="col-md-3" style="padding:1%;">
                 <ul class="nav flex-column">
-                @foreach (App\Memo::distinct()
-                            ->where('user_id','=', Auth::user()->id)
-                            ->get(['category']) as $item)
+                @foreach ($categorys as $item)
                 <li class="nav-item">
                   <a class="nav-link" href="/memo/{{urlencode($item->category)}}">{{$item->category}}</a>
                 </li>
