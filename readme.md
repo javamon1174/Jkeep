@@ -5,9 +5,14 @@
 <p>참고 사이트 : https://laravel.kr/docs/5.4/</p>
 | 항목        | 내용           |
 | ------------- |:-------------:|
+| 프로젝트명      | Jkeep |
+| 프로젝트 설명      | google keep을 모태삼아 학습목적으로 구현한 메모 어플리케이션 |
+| 개발기간      | 2017.3.6 ~ 3.8 |
+| 개발인원      | 단독 |
 | 작업환경      | macOs-Homestead |
-| 개발툴      | ATOM      |
-| zebra stripes | are neat      |
+| 서버환경      | Conoha - ubuntu 16.04 |
+| framework      | laravel(with composer) |
+| site      | [클릭](http://133.130.126.76/memo) |
 <hr>
 <h4>메인 화면</h4>
 <p>레이아웃은 pinterest 레이아웃으로, 메모 어플리케이션에 최적하된 레이아웃을 사용하였습니다.</p>
