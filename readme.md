@@ -7,7 +7,8 @@
 <h4>메인 화면</h4>
 <p>레이아웃은 pinterest 레이아웃으로, 메모 어플리케이션에 최적하된 레이아웃을 사용하였습니다.</p>
 <div align="center">
-    ![main](./screenshot/main.png)
+    <img src="../master/screenshot/main.png?raw=true" width="100" height="100" />
+    ![main](../master/screenshot/main.png)
 </div>
 <h4>글쓰기 화면</h4>
 <p>메인화면에서 input form에 포커스를 두면 jquery를 통해 textarea를 보여줍니다.</p>
