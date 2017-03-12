@@ -12,7 +12,7 @@
 | 작업환경      | macOs-Homestead |
 | 서버환경      | Conoha - ubuntu 16.04 |
 | framework      | laravel(with composer) |
-| site      | [jkeep](http://133.130.126.76/memo){:target="_blank"} |
+| site      | [Jkeep](http://133.130.126.76/memo "Jkeep" target="_blank") |
 <hr>
 <h4>메인 화면</h4>
 <p>레이아웃은 pinterest 레이아웃으로, 메모 어플리케이션에 최적하된 레이아웃을 사용하였습니다.</p>
