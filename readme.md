@@ -4,6 +4,11 @@
 <p>UI 구성은 bootstrap 프레임워크로 구현하였습니다.</p>
 <p>참고 사이트 : https://laravel.kr/docs/5.4/</p>
 <hr>
+| 항목 | 내용 |
+| ---
+| 작업환경 | MacOS - Homestead(virtualbox) |
+| 개발툴 | ATOM |
+<hr>
 <h4>메인 화면</h4>
 <p>레이아웃은 pinterest 레이아웃으로, 메모 어플리케이션에 최적하된 레이아웃을 사용하였습니다.</p>
 <div align="center">
